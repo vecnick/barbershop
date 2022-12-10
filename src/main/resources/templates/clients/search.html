@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Ищем</title>
+</head>
+<body>
+
+<form th:method="POST" th:action="@{/providers/search}">
+  <label for="query">Введите поисковой запрос: </label>
+  <input type="text" id="query" name="query"/>
+  <br/>
+  <input type="submit" value="Искать!"/>
+</form>
+
+<div th:if="${providers}">
+  <div th:if="${providers.isEmpty()}">
+    <span>текстилей не найдено</span>
+  </div>
+
+  <div th:each="provider : ${providers}">
+    <p th:text="${provider.getName() + ', ' + provider.getSecondName() + ', ' + provider.getPatronymic()+ ', ' + provider.getTelephoneNumber()}">provider</p>
+
+    <div th:if="${provider.getRepairMaterials() != null}">
+      <div th:each="repairMaterial : ${provider.getRepairMaterials()}">
+        <a th:href="@{/repairMaterials/{id}(id=${repairMaterial.getId()})}"
+           th:text="${repairMaterial.getName()}">repairMaterial</a>
+      </div>
+    </div>
+
+    <div th:if="${provider.getRepairMaterials() == null}">
+      <span>такого поставщика никто не выбрал</span>
+    </div>
+
+    <hr/>
+  </div>
+</div>
+
+</body>
+</html>

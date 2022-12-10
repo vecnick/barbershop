@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http//www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Провайдер</title>
+</head>
+<body>
+<p th:text="${provider.getName() + ', ' + provider.getSecondName() + ', ' + provider.getPatronymic()+ ', ' + provider.getTelephoneNumber()}">Provider</p>
+
+<div th:if="${repairMaterials.isEmpty()}">
+    <p>Поставщик еще не работал</p>
+    <hr/>
+</div>
+
+<div th:if="${!repairMaterials.isEmpty()}">
+    <hr/>
+    <b>Материалы:</b>
+    <br/>
+    <table th:each="repairMaterial : ${repairMaterials}">
+        <tr>
+            <td>
+                <span th:text="${repairMaterial.getName() + ', ' + repairMaterial.getRetailPrice() + ', ' + repairMaterial.getAmount()}">
+                    repairMaterial
+                </span>
+            </td>
+        </tr>
+    </table>
+    <hr/>
+</div>
+
+<form th:method="GET" th:action="@{/providers/{id}/edit(id=${provider.getId()})}">
+    <input type="submit" value="Редактировать"/>
+</form>
+
+<form th:method="DELETE" th:action="@{/providers/{id}(id=${provider.getId()})}">
+    <input type="submit" value="Удалить"/>
+</form>
+
+</body>
+</html>

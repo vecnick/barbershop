@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http//www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Клиент</title>
+</head>
+<body>
+<p th:text="${client.getName() + ', ' + client.getSecondName() + ', ' + client.getPatronymic()+ ', ' + client.getTelephoneNumber()}">Client</p>
+
+<div th:if="${services.isEmpty()}">
+    <p>Клиент еще не записался ни на одну услугу</p>
+    <hr/>
+</div>
+
+<div th:if="${!services.isEmpty()}">
+    <hr/>
+    <b>услуги:</b>
+    <br/>
+    <table th:each="service : ${services}">
+        <tr>
+            <td>
+                <span th:text="${service.getName() + ', ' + service.getPrice()}">
+                    service
+                </span>
+            </td>
+        </tr>
+    </table>
+    <hr/>
+</div>
+
+<form th:method="GET" th:action="@{/clients/{id}/edit(id=${client.getId()})}">
+    <input type="submit" value="Редактировать"/>
+</form>
+
+<form th:method="DELETE" th:action="@{/clients/{id}(id=${client.getId()})}">
+    <input type="submit" value="Удалить"/>
+</form>
+
+</body>
+</html>

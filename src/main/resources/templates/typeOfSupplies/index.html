@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http//www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Все типы</title>
+</head>
+<body>
+
+<div th:each="typeOfSupply : ${typeOfSupplies}">
+    <a th:href="@{/providers/{id}(id=${provider.getId()})}"
+       th:text="${provider.getName() + ', ' + provider.getSecondName() + ', ' + provider.getPatronymic()+ ', ' + provider.getTelephoneNumber()}">provider</a>
+</div>
+<br/>
+<hr/>
+
+<a href="/providers/new">Добавить поставщика</a>
+<br>
+<form th:method="GET" th:action="@{/providers}">
+    <input type="hidden" name = "sort"th:value="true"/>
+    <button type="submit">сортировать</button>
+</form>
+<br>
+
+
+</body>
+</html>
