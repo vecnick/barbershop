@@ -7,13 +7,13 @@
 <body>
 
 <div th:each="typeOfSupply : ${typeOfSupplies}">
-    <a th:href="@{/providers/{id}(id=${provider.getId()})}"
-       th:text="${provider.getName() + ', ' + provider.getSecondName() + ', ' + provider.getPatronymic()+ ', ' + provider.getTelephoneNumber()}">provider</a>
+    <a th:href="@{typeOfSupply/s/{id}(id=${typeOfSupply.getId()})}"
+       th:text="${typeOfSupply.getName()}">typeOfSupply</a>
 </div>
 <br/>
 <hr/>
 
-<a href="/providers/new">Добавить поставщика</a>
+<a href="/typeOfSupplies/new">Добавить тип</a>
 <br>
 <form th:method="GET" th:action="@{/providers}">
     <input type="hidden" name = "sort"th:value="true"/>

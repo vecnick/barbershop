@@ -53,4 +53,3 @@ Create table Person(
     role varchar(100) Not NULL,
     password varchar NOT NULL
 );
-update person set role= 'ROLE_ADMIN' where id=0;

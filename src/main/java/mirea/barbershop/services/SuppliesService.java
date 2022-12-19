@@ -76,6 +76,11 @@ public class SuppliesService {
         }
     }
 
+    public TypeOfSupplies getSupplyOwner(int id) {
+        return suppliesRepository.findById(id).map(Supplies::getType).orElse(null);
+    }
+
+
     @Transactional
     public void release(int id){
         suppliesRepository.findById(id).ifPresent(
